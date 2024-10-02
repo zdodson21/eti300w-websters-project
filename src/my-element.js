@@ -1,9 +1,10 @@
 import { LitElement, css, html } from 'lit';
 import litLogo from './assets/lit.svg';
 import viteLogo from '/vite.svg';
+import { sql } from '@vercel/postgres';
 
 /**
- * An example element.
+ * ETI 300w Webster's Project.
  *
  * @slot - This element has a slot
  * @csspart button - The button
@@ -51,6 +52,13 @@ export class MyElement extends LitElement {
 
   _onClick() {
     this.count++
+  }
+
+  /**
+   * TODO hopefully SQL can go here and just work...
+   */
+  async updateTable(request, response) {
+
   }
 
   static get styles() {
