@@ -1,8 +1,7 @@
 import { LitElement, css, html } from 'lit';
-import litLogo from './assets/lit.svg';
-import viteLogo from '/vite.svg';
 import { sql } from '@vercel/postgres';
 
+// TODO transform this component into the write-database component. Will handle displaying tuples added and logic of writing data to database
 /**
  * ETI 300w Webster's Project.
  *
