@@ -1,5 +1,6 @@
-import { sql } from "@vercel/postgres";
+// import { sql } from "@vercel/postgres";
 import { LitElement, css, html } from "lit";
+import {writeHandler, readHandler} from "../api/request.js";
 
 export class AccessDatabase extends LitElement {
   constructor() {
@@ -21,6 +22,14 @@ export class AccessDatabase extends LitElement {
         margin: 12px 0px;
       }
     `;
+  }
+
+  writeDatabase() {
+
+  }
+
+  readDatabase() {
+  
   }
 
   render() {
