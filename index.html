@@ -5,20 +5,26 @@
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ETI 300w Websters Project</title>
-    <link rel="stylesheet" href="./src/index.css" />
-    <script type="module" src="/src/write-database.js"></script>
-    <script type="module" src="/src/read-database.js"></script>
+    <link rel="stylesheet" href="./src/styles.css" />
+    <script type="module" src="/src/access-database.js"></script>
+    <script type="module" src="/src/sample-database.js"></script>
   </head>
   <body>
     <h1>ETI 300w Websters Project</h1>
     <h2>Zach Dodson, Sean Murphy, Tyler Struben</h2>
-    <section class="write-database">
-      <h3>Write data to database</h3>
-      <write-database></write-database>
+    <section class="database-section" id="write-database">
+      <access-database access-type="write">
+        <h3 slot="title">Write to Database</h3>
+      </access-database>
     </section>
-    <section class="read-database">
-      <h3>Read data from database</h3>
-      <read-database></read-database>
+    <section class="database-section" id="read-database">
+      <access-database access-type="read">
+        <h3 slot="title">Read from Database</h3>
+      </access-database>
+    </section>
+    <section class="database-section" id="sample-database">
+      <!-- This component is to be commented out, but will be a frontend example and possible testing environment for what a response from DB should look like -->
+      <sample-database></sample-database>
     </section>
   </body>
 </html>
