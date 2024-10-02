@@ -23,3 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# Might remove later if I can get things to encrypt. For now just vercel deploy with CLI
+.env.development.local
