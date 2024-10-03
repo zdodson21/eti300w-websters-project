@@ -28,4 +28,4 @@ export default async function handler(request, response) {
 }
 
 // Test URL to add to DB
-// http://localhost:3000/api/server?bookName=fluffy&bookGenre=John
+// http://localhost:3000/api/server?bookName=testBook&bookGenre=testGenre
