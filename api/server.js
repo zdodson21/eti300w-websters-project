@@ -2,6 +2,8 @@ import { sql } from "@vercel/postgres";
 
 // https://vercel.com/docs/storage/vercel-postgres/quickstart
 export default async function handler(request, response) {
+  
+  // console.table(request);
   try {
     // Get the information to be written to DB
     const bookName = request.query.bookName;

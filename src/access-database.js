@@ -68,7 +68,7 @@ export class AccessDatabase extends LitElement {
     }
 
     // Send to DB
-    const DATA = [ {
+    const query = [ {
       "bookName": BOOK_NAME,
       "bookAuthor": BOOK_AUTHOR,
       "bookPrice": BOOK_PRICE,
@@ -78,7 +78,9 @@ export class AccessDatabase extends LitElement {
       "customerPhone": CUSTOMER_PHONE
     }];
 
-    if (this.developerMode) console.table(DATA);
+    handler(query);
+
+    if (this.developerMode) console.table(query);
   }
 
   // TODO figure out if this would work here or if it needs to be in server.js
