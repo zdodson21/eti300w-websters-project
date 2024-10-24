@@ -1,4 +1,3 @@
-// import { sql } from "@vercel/postgres";
 import { LitElement, css, html } from "lit";
 import '../api/server.js';
 import handler from "../api/server.js";
@@ -26,6 +25,9 @@ export class AccessDatabase extends LitElement {
     `;
   }
 
+  /**
+   * @description Writes data from HTML form / input tags to the database, then displays database with changes
+   */
   writeDatabase(e) {
     e.preventDefault();
     // get the value from the input fields
@@ -84,6 +86,9 @@ export class AccessDatabase extends LitElement {
   }
 
   // TODO figure out if this would work here or if it needs to be in server.js
+  /**
+   * @description Reads the database, calls displayDatabase to display entire database contents
+   */
   async readDatabase() {
     const books = await sql`
       SELECT * FROM Books;
