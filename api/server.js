@@ -25,7 +25,7 @@ export default async function handler(request, response) {
 
     // Write to DB
     await sql`
-      INSERT INTO Books (name, genre) VALUES (
+      INSERT INTO Data (bookName, bookAuthor, bookPrice, bookGenre, customerName, customerEmail, customerPhone) VALUES (
         ${bookName}, 
         ${bookAuthor},
         ${bookPrice},
@@ -39,11 +39,11 @@ export default async function handler(request, response) {
     return response.status(500).json({ error });
   }
 
-  const books = await sql`
-    SELECT * FROM Books;
+  const data = await sql`
+    SELECT * FROM Data;
   `;
-  return response.status(200).json({ books });
+  return response.status(200).json({ data });
 }
 
 // Test URL to add to DB
-// http://localhost:3000/api/server?bookName=testBook&bookGenre=testGenre
+// http://localhost:3000/api/server?bookName=TreasureIsland&bookAuthor=Stevenson&bookPrice=10.99&bookGenre=fiction&customerName=Zach&customerEmail=test@psu.edu&customerPhone=1324567890
