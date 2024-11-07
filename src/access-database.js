@@ -69,23 +69,10 @@ export class AccessDatabase extends LitElement {
       return;
     }
 
-    fetch(`https://eti300w-websters-project.vercel.app/api/server?bookName=TreasureIsland&bookAuthor=Stevenson&bookPrice=10.99&bookGenre=fiction&customerName=Zach&customerEmail=test@psu.edu&customerPhone=1324567890`).then(d => d.ok ? d.json(): {}).then(data => {
+    fetch(`https://eti300w-websters-project.vercel.app/api/server?bookName=${BOOK_NAME}&bookAuthor=${BOOK_AUTHOR}&bookPrice=${BOOK_PRICE}&bookGenre=${BOOK_GENRE}&customerName=${CUSTOMER_NAME}&customerEmail=${CUSTOMER_EMAIL}&customerPhone=${CUSTOMER_PHONE}`).then(d => d.ok ? d.json(): {}).then(data => {
       console.log(data);
+      this.displayDatabase(data);
     })
-  }
-
-  // TODO figure out if this would work here or if it needs to be in server.js
-  /**
-   * @description Reads the database, calls displayDatabase to display entire database contents
-   */
-  async readDatabase() {
-    const books = await sql`
-      SELECT * FROM Books;
-    `;
-    // this needs to render array of objects from JSON
-    // ! this should be done in this.displayDatabase() function
-    console.table(books);
-    return response.status(200).json({ books });
   }
 
   /**
@@ -94,15 +81,32 @@ export class AccessDatabase extends LitElement {
   displayDatabase(dataset) {
     this.busser();
 
-    const TABLE = this.shadowRoot.querySelector(".table-data");
+    let index = 0;
+    let tuples = dataset.data.rows;
+    const TABLE = this.shadowRoot.querySelector(".deletable");
 
+    for (let i = 0; i < tuples.length; i++) {
+      let tupleData = tuples[i];
+      const bookName = tupleData.bookName;
+      console.log(bookName);
+      const bookAuthor = tupleData.bookAuthor;
+      const bookPrice = tupleData.bookPrice;
+      const bookGenre = tupleData.bookGenre;
+      const customerName = tupleData.customerName;
+      const customerEmail = tupleData.customerEmail;
+      const customerPhone = tupleData.customerPhone;
+
+      index++;
+    }
+
+    this.requestUpdate();
   }
 
   /**
    * @description Eliminates the table
    */
   busser() {
-    const TABLE = this.shadowRoot.querySelector(".table-data");
+    const TABLE = this.shadowRoot.querySelector(".deletable");
     try {
       TABLE.innerHTML = "";
     } catch (error) {
@@ -140,6 +144,19 @@ export class AccessDatabase extends LitElement {
           <h4 class="data-title">${this._tableName}</h4>
           <table class="data-table">
             <!-- Table rows will be added here utilizing JS -->
+            <tr>
+              <th>Index</th>
+              <th>Book Name</th>
+              <th>Book Author</th>
+              <th>Book Price</th>
+              <th>Book Genre</th>
+              <th>Customer Name</th>
+              <th>Customer Email</th>
+              <th>Customer Phone</th>
+            </tr>
+            <div class="deletable">
+
+            </div>
           </table>
         </div>
       </div>
