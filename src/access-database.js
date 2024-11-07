@@ -69,20 +69,9 @@ export class AccessDatabase extends LitElement {
       return;
     }
 
-    // Send to DB
-    const query = [ {
-      "bookName": BOOK_NAME,
-      "bookAuthor": BOOK_AUTHOR,
-      "bookPrice": BOOK_PRICE,
-      "bookGenre": BOOK_GENRE,
-      "customerName": CUSTOMER_NAME,
-      "customerEmail": CUSTOMER_EMAIL,
-      "customerPhone": CUSTOMER_PHONE
-    }];
-
-    handler(query);
-
-    if (this.developerMode) console.table(query);
+    fetch(`https://eti300w-websters-project.vercel.app/api/server?bookName=TreasureIsland&bookAuthor=Stevenson&bookPrice=10.99&bookGenre=fiction&customerName=Zach&customerEmail=test@psu.edu&customerPhone=1324567890`).then(d => d.ok ? d.json(): {}).then(data => {
+      console.log(data);
+    })
   }
 
   // TODO figure out if this would work here or if it needs to be in server.js
