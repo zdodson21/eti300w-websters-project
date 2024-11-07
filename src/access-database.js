@@ -96,6 +96,18 @@ export class AccessDatabase extends LitElement {
       const customerEmail = tupleData.customerEmail;
       const customerPhone = tupleData.customerPhone;
 
+      TABLE.innerHTML += `
+        <tr>
+          <td>${bookName}</td>
+          <td>${bookAuthor}</td>
+          <td>${bookPrice}</td>
+          <td>${bookGenre}</td>
+          <td>${customerName}</td>
+          <td>${customerEmail}</td>
+          <td>${customerPhone}</td>
+        </tr>
+      `;
+
       index++;
     }
 
