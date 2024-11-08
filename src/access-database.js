@@ -9,6 +9,7 @@ export class AccessDatabase extends LitElement {
     this.header = "Header text";
     this._tableName = null;
     this.developerMode = false;
+    this.tableData = [];
   }
 
   static get styles() {
@@ -21,6 +22,11 @@ export class AccessDatabase extends LitElement {
         border: 1px solid black;
         padding: 12px;
         margin: 12px 0px;
+      }
+
+      td, th {
+        border: 1px solid black;
+        padding: 8px;
       }
     `;
   }
@@ -81,50 +87,51 @@ export class AccessDatabase extends LitElement {
   displayDatabase(dataset) {
     this.busser();
 
-    let index = 0;
+    let tableIndex = 0;
     let tuples = dataset.data.rows;
     const TABLE = this.shadowRoot.querySelector(".deletable");
 
     for (let i = 0; i < tuples.length; i++) {
       let tupleData = tuples[i];
-      const bookName = tupleData.bookname;
-      console.log(bookName);
-      const bookAuthor = tupleData.bookauthor;
-      const bookPrice = tupleData.bookprice;
-      const bookGenre = tupleData.bookgenre;
-      const customerName = tupleData.customername;
-      const customerEmail = tupleData.customeremail;
-      const customerPhone = tupleData.customerphone;
+      const BOOK_NAME = tupleData.bookname;
+      const BOOK_AUTHOR = tupleData.bookauthor;
+      const BOOK_PRICE = tupleData.bookprice;
+      const BOOK_GENRE = tupleData.bookgenre;
+      const CUSTOMER_NAME = tupleData.customername;
+      const CUSTOMER_EMAIL = tupleData.customeremail;
+      const CUSTOMER_PHONE = tupleData.customerphone;
 
-      TABLE.innerHTML += `
-        <tr>
-          <td>${bookName}</td>
-          <td>${bookAuthor}</td>
-          <td>${bookPrice}</td>
-          <td>${bookGenre}</td>
-          <td>${customerName}</td>
-          <td>${customerEmail}</td>
-          <td>${customerPhone}</td>
-        </tr>
-      `;
+      const rowData = {
+        index: tableIndex,
+        bookName: BOOK_NAME,
+        bookAuthor: BOOK_AUTHOR,
+        bookPrice: BOOK_PRICE,
+        bookGenre: BOOK_GENRE,
+        customerName: CUSTOMER_NAME,
+        customerEmail: CUSTOMER_EMAIL,
+        customerPhone: CUSTOMER_PHONE
+      };
 
-      index++;
+      console.table(rowData);
+
+      tableIndex++;
+      this.tableData.push(rowData);
     }
-
-    this.requestUpdate();
   }
 
   /**
    * @description Eliminates the table
    */
   busser() {
-    const TABLE = this.shadowRoot.querySelector(".deletable");
-    try {
-      TABLE.innerHTML = "";
-    } catch (error) {
-      if(this.developerMode) console.log(error);
-    }
-    this.requestUpdate();
+    // const TABLE = this.shadowRoot.querySelector(".deletable");
+    // try {
+    //   TABLE.innerHTML = "";
+    // } catch (error) {
+    //   if(this.developerMode) console.log(error);
+    // }
+    // this.requestUpdate();
+
+    this.tableData = [];
   }
 
   render() {
@@ -166,9 +173,18 @@ export class AccessDatabase extends LitElement {
               <th>Customer Email</th>
               <th>Customer Phone</th>
             </tr>
-            <div class="deletable">
-
-            </div>
+            ${this.tableData.map((row) => html`
+              <tr>
+                <td>${row.index}</td>
+                <td>${row.bookName}</td>
+                <td>${row.bookAuthor}</td>
+                <td>${row.bookPrice}</td>
+                <td>${row.bookGenre}</td>
+                <td>${row.customerName}</td>
+                <td>${row.customerEmail}</td>
+                <td>${row.customerPhone}</td>
+              </tr>
+            `)}
           </table>
         </div>
       </div>
@@ -180,6 +196,7 @@ export class AccessDatabase extends LitElement {
       header: { type: String, reflect: true },
       _tableName: { type: String },
       developerMode: { type: Boolean, reflect: true, attribute: "developer-mode" },
+      tableData: { type: Array }
     }
   }
 
