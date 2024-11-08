@@ -1,7 +1,5 @@
 import { LitElement, css, html } from "lit";
 import '../api/server.js';
-import handler from "../api/server.js";
-import { sql } from "@vercel/postgres";
 
 export class AccessDatabase extends LitElement {
   constructor() {
@@ -87,9 +85,8 @@ export class AccessDatabase extends LitElement {
   displayDatabase(dataset) {
     this.busser();
 
-    let tableIndex = 0;
+    let tableIndex = 1;
     let tuples = dataset.data.rows;
-    const TABLE = this.shadowRoot.querySelector(".deletable");
 
     for (let i = 0; i < tuples.length; i++) {
       let tupleData = tuples[i];
@@ -123,14 +120,6 @@ export class AccessDatabase extends LitElement {
    * @description Eliminates the table
    */
   busser() {
-    // const TABLE = this.shadowRoot.querySelector(".deletable");
-    // try {
-    //   TABLE.innerHTML = "";
-    // } catch (error) {
-    //   if(this.developerMode) console.log(error);
-    // }
-    // this.requestUpdate();
-
     this.tableData = [];
   }
 
@@ -141,7 +130,7 @@ export class AccessDatabase extends LitElement {
         <form class="control-wrapper" @submit="${this.writeDatabase}">
           <div class="control-panel">
             <input type="submit" id="send-data" class="ctrl-pnl-btn" value="Send Data to Database"></input>
-            <button id="display-table" class="ctrl-pnl-btn" @click="${this.readDatabase}">Display Table</button>
+            <button id="display-table" class="ctrl-pnl-btn" @click="${this.readDatabase}" disabled>Display Table</button>
             <button id="clear-table" class="ctrl-pnl-btn" @click="${this.busser}">Clear Table</button>
           </div>
           <div class="data-entry">
