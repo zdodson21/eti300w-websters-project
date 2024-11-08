@@ -22,17 +22,6 @@ export class AccessDatabase extends LitElement {
         padding: 12px;
         margin: 12px 0px;
       }
-
-      tr {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-      }
-
-      td, th {
-        border: 1px solid black;
-        padding: 12px;
-      }
     `;
   }
 
@@ -86,13 +75,6 @@ export class AccessDatabase extends LitElement {
     })
   }
 
-  helpDisplayButton() {
-    fetch(`https://eti300w-websters-project.vercel.app/api/server?`).then(d => d.ok ? d.json(): {}).then(data => {
-      console.log(data);
-      this.displayDatabase(data);
-    })
-  }
-
   /**
    * @description Displays the table in HTML
    */
@@ -101,7 +83,7 @@ export class AccessDatabase extends LitElement {
 
     let index = 0;
     let tuples = dataset.data.rows;
-    const TABLE = this.shadowRoot.querySelector(".data-table");
+    const TABLE = this.shadowRoot.querySelector(".deletable");
 
     for (let i = 0; i < tuples.length; i++) {
       let tupleData = tuples[i];
@@ -114,7 +96,6 @@ export class AccessDatabase extends LitElement {
       const customerEmail = tupleData.customeremail;
       const customerPhone = tupleData.customerphone;
 
-      // TODO fix this so it actually functions
       TABLE.innerHTML += `
         <tr>
           <td>${bookName}</td>
@@ -137,7 +118,7 @@ export class AccessDatabase extends LitElement {
    * @description Eliminates the table
    */
   busser() {
-    const TABLE = this.shadowRoot.querySelector(".data-table");
+    const TABLE = this.shadowRoot.querySelector(".deletable");
     try {
       TABLE.innerHTML = "";
     } catch (error) {
@@ -153,7 +134,7 @@ export class AccessDatabase extends LitElement {
         <form class="control-wrapper" @submit="${this.writeDatabase}">
           <div class="control-panel">
             <input type="submit" id="send-data" class="ctrl-pnl-btn" value="Send Data to Database"></input>
-            <button id="display-table" class="ctrl-pnl-btn" @click="${this.helpDisplayButton}">Display Table</button>
+            <button id="display-table" class="ctrl-pnl-btn" @click="${this.readDatabase}">Display Table</button>
             <button id="clear-table" class="ctrl-pnl-btn" @click="${this.busser}">Clear Table</button>
           </div>
           <div class="data-entry">
@@ -185,6 +166,9 @@ export class AccessDatabase extends LitElement {
               <th>Customer Email</th>
               <th>Customer Phone</th>
             </tr>
+            <div class="deletable">
+
+            </div>
           </table>
         </div>
       </div>
