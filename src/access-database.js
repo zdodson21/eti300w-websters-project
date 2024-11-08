@@ -130,8 +130,6 @@ export class AccessDatabase extends LitElement {
         <form class="control-wrapper" @submit="${this.writeDatabase}">
           <div class="control-panel">
             <input type="submit" id="send-data" class="ctrl-pnl-btn" value="Send Data to Database"></input>
-            <button id="display-table" class="ctrl-pnl-btn" @click="${this.readDatabase}" disabled>Display Table</button>
-            <button id="clear-table" class="ctrl-pnl-btn" @click="${this.busser}">Clear Table</button>
           </div>
           <div class="data-entry">
             <input type="text" placeholder="Book title here..." class="data-entry-input" id="book-name">
