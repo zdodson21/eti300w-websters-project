@@ -87,14 +87,14 @@ export class AccessDatabase extends LitElement {
 
     for (let i = 0; i < tuples.length; i++) {
       let tupleData = tuples[i];
-      const bookName = tupleData.bookName;
+      const bookName = tupleData.bookname;
       console.log(bookName);
-      const bookAuthor = tupleData.bookAuthor;
-      const bookPrice = tupleData.bookPrice;
-      const bookGenre = tupleData.bookGenre;
-      const customerName = tupleData.customerName;
-      const customerEmail = tupleData.customerEmail;
-      const customerPhone = tupleData.customerPhone;
+      const bookAuthor = tupleData.bookauthor;
+      const bookPrice = tupleData.bookprice;
+      const bookGenre = tupleData.bookgenre;
+      const customerName = tupleData.customername;
+      const customerEmail = tupleData.customeremail;
+      const customerPhone = tupleData.customerphone;
 
       TABLE.innerHTML += `
         <tr>
